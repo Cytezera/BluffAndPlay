@@ -21,6 +21,7 @@ const roundStart = (game,io) =>{
         changeBet(game.players[newBbIndex],game.minBet);
         game.gameState.round.curTurn = game.players[(newBbIndex + 1) % players.length].id;
         game.gameState.round.highestBet = game.minBet;
+        game.gameState.round.lastTurn = game.players[newBbIndex].id;
     
     io.to(game.id).emit("updateGame",game);
     

@@ -1,7 +1,7 @@
 const {generateRoomCode, joinRoom} = require("../middleware/roomMiddleware");
 const { generateDeck, distributeCards }=  require ("../middleware/deckMiddleware");
 const { roundStart } = require("../middleware/gameMiddleware");
-const { playerCheck } = require ("../middleware/roundMiddleware");
+const { playerCheck, playerFold } = require ("../middleware/roundMiddleware");
 
 module.exports = ( io, activeGames) =>{
     io.on("connection", (socket) =>{
@@ -20,6 +20,7 @@ module.exports = ( io, activeGames) =>{
                     deck: null,
                     round:{
                         curTurn:null,
+                        lastTurn:null,
                         pot: 0,
                         highestBet:null,
                     },
@@ -65,6 +66,13 @@ module.exports = ( io, activeGames) =>{
                 return;
             }
             playerCheck(socket.id,game,io);
+        });
+        socket.on("fold",(roomCode) =>{
+            game = activeGames[roomCode];
+            if (!game){
+                return;
+            }
+            playerFold(socket.id,game,io);
         });
     })
 }

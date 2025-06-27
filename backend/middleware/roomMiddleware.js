@@ -19,7 +19,8 @@ const joinRoom = (io,socket,game,roomCode, playerName) =>{
             hand: [],
             isHost: game.players.length === 0,
             action:null,
-            bet: null
+            bet: null,
+            folded: false 
         });
     }
     socket.join(roomCode);

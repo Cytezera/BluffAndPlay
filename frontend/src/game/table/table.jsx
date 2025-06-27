@@ -16,12 +16,14 @@ const Table = ({game}) => {
                 let role = ' ';
                 let turn = ' ';
                 let bet = ' ' ;
+                let folded = ' ';
                 if (player.id === game.gameState.bb) role = ' - Big Blind';
                 if (player.id === game.gameState.round.sb) role = ' - Small Blind';
                 if (player.id === game.gameState.round.curTurn) turn = ' (Player\'s Turn)'
                 if (player.bet) bet = player.bet
+                if (player.folded === true) folded = "FOLDED"
                 return ( 
-                    <div key ={index}>({player.chips}) {player.name}  {role} {turn} Bet: {bet}</div>
+                    <div key ={index}>({player.chips}) {player.name}  {role}  Bet: {bet} {folded} {turn}</div>
                 )
                 
             })}

@@ -6,7 +6,9 @@ const Button = ({game}) =>{
     const gameCheck = () =>{
         socket.emit("check",(game.code));
     }
-
+    const gameFold = () =>{
+        socket.emit("fold",(game.code));
+    }
     return (
         <div>
             {game.gameState.round.curTurn === socket.id &&(
@@ -15,7 +17,7 @@ const Button = ({game}) =>{
                     <div>
                         <button onClick={gameCheck}> Check </button>
                         <button> Raise </button>
-                        <button> Fold </button>
+                        <button onClick={gameFold}> Fold </button>
                     </div>
                 </div>
             )}
