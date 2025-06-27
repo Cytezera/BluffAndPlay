@@ -4,15 +4,21 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
 const http = require("http");
+
 const app = express();
 const server = http.createServer(app);
-const io = new Sever(server, {
-    cors: {
-        origin: "http://localhost:5175",
-        methods:["GET","POST"]
-    }
+const API_URL = process.env.API_URL;
+
+const corsOptions = {
+    origin: API_URL,
+    methods: ["GET","POST"],
+    credentials:true
+};
+const io = new Server(server, {
+    cors: corsOptions
+    
 });
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 let activeGames = {};
