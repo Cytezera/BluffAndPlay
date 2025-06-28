@@ -11,6 +11,14 @@ const Table = ({game}) => {
             <div>
                 Game Start 
             </div>
+            <div>
+                Table:
+            </div>
+            {game.gameState.table.map((card,index) =>(
+                <div key = {index}>
+                    {card.value} of {card.suit}
+                </div>
+            ))}
             <div> Players: </div>
             {game.players.map((player,index) =>{
                 let role = ' ';

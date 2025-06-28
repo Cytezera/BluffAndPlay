@@ -3,8 +3,18 @@ import styles from "./button.module.css"
 import socket from "../../../socket.js";
 
 const Button = ({game}) =>{
+
+    const [raiseAmount, setRaiseAmount] = useState(game.minBet);
+
+    const curPlayer = game.players.find(p => p.id === socket.id);
+    const minBet = game.minBet || 0;
+    const maxBet = curPlayer ? curPlayer.chips : minBet;
     const gameCheck = () =>{
         socket.emit("check",(game.code));
+    }
+    const gameRaise = () =>{
+        console.log("works here ");
+        socket.emit("raise",{roomCode: game.code, raiseAmount:raiseAmount});
     }
     const gameFold = () =>{
         socket.emit("fold",(game.code));
@@ -15,10 +25,11 @@ const Button = ({game}) =>{
                 <div>
                     <div> Your Turn: </div>
                     <div>
-                        <button onClick={gameCheck}> Check </button>
-                        <button> Raise </button>
+                        <button onClick={gameCheck}> Call/Check </button>
+                        <button onClick={gameRaise}> Raise: {raiseAmount} </button>
                         <button onClick={gameFold}> Fold </button>
                     </div>
+                    <input type="range" min={minBet} max={maxBet} value={raiseAmount} onChange={(e) => setRaiseAmount(Number(e.target.value))}/>
                 </div>
             )}
 

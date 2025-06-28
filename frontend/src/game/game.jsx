@@ -44,7 +44,9 @@ const Game = () => {
             {game && game.start === true &&(
                 <div>
                     <Table game = {game}/>
+                {game.gameState.active === true && (
                     <Player game = {game}/>
+                )}
                 </div>
             )}
         </div>

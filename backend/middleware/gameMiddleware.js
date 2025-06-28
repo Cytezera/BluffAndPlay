@@ -1,6 +1,7 @@
 const { generateDeck , distributeCards } = require("./deckMiddleware");
 const { changeBet } = require("./roundMiddleware");
 const roundStart = (game,io) =>{
+    game.gameState.active = true;
     players = game.players;
     game.gameState.deck = generateDeck();
     distributeCards(game);
@@ -20,11 +21,11 @@ const roundStart = (game,io) =>{
         changeBet(game.players[newSbIndex],game.minBet / 2);
         changeBet(game.players[newBbIndex],game.minBet);
         game.gameState.round.curTurn = game.players[(newBbIndex + 1) % players.length].id;
-        game.gameState.round.highestBet = game.minBet;
-        game.gameState.round.lastTurn = game.players[newBbIndex].id;
+        game.gameState.highestBet = game.minBet;
+        game.gameState.round.lastTurn = game.gameState.round.curTurn;
     
     io.to(game.id).emit("updateGame",game);
     
 }
 
-module.exports = { roundStart };
+module.exports = { roundStart};
