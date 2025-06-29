@@ -12,6 +12,9 @@ const Table = ({game}) => {
                 Game Start 
             </div>
             <div>
+                <div>Pot: {game.gameState.pot}</div>
+            </div>
+            <div>
                 Table:
             </div>
             {game.gameState.table.map((card,index) =>(

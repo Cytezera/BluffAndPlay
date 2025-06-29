@@ -4,6 +4,7 @@ const { changeStage,gameEnd } = require("./logicMiddleware");
 const changeBet = (player,amount) =>{
     player.chips -= amount - player.bet;
     player.bet = amount;
+    game.gameState.pot += amount;
 }
 
 const nextTurn = (game,io) =>{

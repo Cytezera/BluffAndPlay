@@ -33,7 +33,7 @@ const checkWinner = (game) =>{
     const playersLeft = game.players.filter(p => !p.folded);
     if (playersLeft.length === 1){
         game.gameState.winner = playersLeft[0];
-        playersLeft[0].chips += game.pot;
+        playersLeft[0].chips += game.gameState.pot;
         return
     }
     /*while(game.gameState.table.length < 5){
