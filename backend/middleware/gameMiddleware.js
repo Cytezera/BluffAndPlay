@@ -1,5 +1,6 @@
 const { generateDeck , distributeCards } = require("./deckMiddleware");
 const { changeBet } = require("./roundMiddleware");
+
 const roundStart = (game,io) =>{
     game.gameState.active = true;
     players = game.players;
@@ -10,6 +11,8 @@ const roundStart = (game,io) =>{
     if (game.gameState.sb === null){
         newSbIndex = 0; 
         newBbIndex = 1;
+        
+        
     }else {
         const sbIndex = players.findIndex(p => p.id === game.gameState.sb);
         newSbIndex = (sbIndex + 1 ) % players.length;

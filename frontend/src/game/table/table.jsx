@@ -15,6 +15,11 @@ const Table = ({game}) => {
                 <div>Pot: {game.gameState.pot}</div>
             </div>
             <div>
+                {!game.active && (
+                    <div> Winner : {game.gameState.winner.name} </div>
+                )}
+            </div>
+            <div>
                 Table:
             </div>
             {game.gameState.table.map((card,index) =>(
@@ -28,9 +33,9 @@ const Table = ({game}) => {
                 let turn = ' ';
                 let bet = ' ' ;
                 let folded = ' ';
-                if (player.id === game.gameState.bb) role = ' - Big Blind';
-                if (player.id === game.gameState.round.sb) role = ' - Small Blind';
-                if (player.id === game.gameState.round.curTurn) turn = ' (Player\'s Turn)'
+                if (game.gameState.active && player.id === game.gameState.bb) role = ' - Big Blind';
+                if (game.gameState.active && player.id === game.gameState.round.sb) role = ' - Small Blind';
+                if (game.gameState.active && player.id === game.gameState.round.curTurn) turn = ' (Player\'s Turn)'
                 if (player.bet) bet = player.bet
                 if (player.folded === true) folded = "FOLDED"
                 return ( 

@@ -1,18 +1,17 @@
 const getBestHand = (hand) =>{
     const combination = getCombinations(cards,5);
     let best = null;
-    let bestRank = null;
+    let bestScore = -1;
+    let bestDesc = '';
     for (const combo of combination){
-        const rank = rankHand(combo);
-        if (!bestHand || compareRanks(rank,bestRank) > 0){
-            best = combo;
-            bestRank = rank;
+        const { score, description } = evaluateCards(hand);
+        if (score > bestScore){
+            best = hand;
+            bestScore = score;
+            bestDesc = description;
         }
     }
     return best;
-}
-const rankHand = (hand) =>{
-
 }
 
 const getCombination = (cards, num) =>{
@@ -31,5 +30,10 @@ const getCombination = (cards, num) =>{
     backtrack(0,[]);
     return result;
 }
+const evaluateCards = (hand) => {
+    const values = hand.map(card => card.value).sort((a,b) => b - a );
+    const suits = hand.map(card => card.suits);
+}
 
 module.exports = { getBestHand };
+
