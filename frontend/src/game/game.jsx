@@ -13,6 +13,9 @@ const Game = () => {
     const handleUpdate = (data) =>{
         setGame(data);
     }
+    const handleCopy = () =>{
+        navigator.clipboard.writeText(roomCode);
+    };
     useEffect(() => {
         socket.emit("getInfo",(roomCode));
         socket.once("updateGame",handleUpdate);
@@ -35,6 +38,7 @@ const Game = () => {
                     {game.players.map((player,index) =>(
                         <div key={index}> {player.name}</div>
                     ))} 
+                    <button onClick={handleCopy} >  Copy Code </button>
                 </div>
             )}
 

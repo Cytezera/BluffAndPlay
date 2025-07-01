@@ -16,7 +16,7 @@ const changeStage = (game) => {
             table.push(deck.pop());
             break;
         case 3:
-            gameEnd(deck);
+            gameEnd(game);
             break;
         default:
             console.log("Error during stages");
@@ -66,6 +66,14 @@ const playerCheck = (socketid,game,io) =>{
 const playerFold = async (socketid, game, io) =>{
     let curPlayer = game.players.find(p=> p.id === socketid);
     curPlayer.folded = true;
+    if (socketid === game.gameState.round.lastTurn){
+        let curIndex = game.players.findIndex(p => p.id === socketid);
+        let ori = curIndex;
+        do{
+            curIndex = (curIndex + 1) % game.players.length;
+        }while(game.players[curIndex].folded === true);
+        game.gameState.round.lastTurn = game.players[curIndex].id;
+    }
     await nextTurn(game,io);
     io.to(game.code).emit("updateGame",game);
 }
