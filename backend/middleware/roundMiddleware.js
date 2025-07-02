@@ -2,7 +2,7 @@ const {  checkWinner} = require("./logicMiddleware");
 const { generateDeck, distributeCards  } = require("./deckMiddleware");
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const changeStage = (game) => {
+const changeStage = (game,io) => {
     stage = game.gameState.stage
     deck = game.gameState.deck;
     table = game.gameState.table;
@@ -16,7 +16,7 @@ const changeStage = (game) => {
             table.push(deck.pop());
             break;
         case 3:
-            gameEnd(game);
+            gameEnd(game,io);
             break;
         default:
             console.log("Error during stages");
@@ -49,7 +49,7 @@ const nextTurn = (game,io) =>{
     }while(game.players[curIndex].folded === true);
     game.gameState.round.curTurn = game.players[curIndex].id;
     if (game.gameState.round.curTurn === game.gameState.round.lastTurn){
-        changeStage(game);                
+        changeStage(game,io);                
     }
 }
 
@@ -97,7 +97,7 @@ const resetRound = (game) =>{
     gameState.pot = 0;
     gameState.stage = 0;
     gameState.table = [];
-    gameState.winner = [];
+    gameState.winner = {id:[], name:[], desc: []};
     gameState.active = true;
 
     gameState.deck = generateDeck();

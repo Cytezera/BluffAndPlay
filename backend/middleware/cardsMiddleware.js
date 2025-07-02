@@ -32,7 +32,7 @@ const valueRank = {
 
 const evaluateCards = (hand) => {
     const values = hand.map(card => valueRank[card.value]).sort((a,b) => b - a );
-    const suits = hand.map(card => card.suits);
+    const suits = hand.map(card => card.suit);
     const valueCounts = {};
     for (const v of values){
         valueCounts[v] = (valueCounts[v] || 0 ) + 1;
@@ -89,7 +89,7 @@ const getBestHand = (hand) =>{
     for (const combo of combination){
         const { score, description } = evaluateCards(combo);
         if (score > bestScore){
-            best = hand;
+            best = combo;
             bestScore = score;
             bestDesc = description;
         }

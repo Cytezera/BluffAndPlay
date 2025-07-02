@@ -15,8 +15,11 @@ const Table = ({game}) => {
                 <div>Pot: {game.gameState.pot}</div>
             </div>
             <div>
-                {!game.active && (
-                    <div> Winner : {game.gameState.winner.name} </div>
+                {!game.active && game.winner&&(
+                    <div> Winner : {game.gameState.winner.name.map((name,index) =>(
+                        <div key={index}>{name}</div>
+                    ))}
+                    </div>
                 )}
             </div>
             <div>
