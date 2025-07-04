@@ -97,7 +97,7 @@ const resetRound = (game) =>{
     gameState.pot = 0;
     gameState.stage = 0;
     gameState.table = [];
-    gameState.winner = {id:[], name:[], desc: []};
+    gameState.winner = []; 
     gameState.active = true;
 
     gameState.deck = generateDeck();

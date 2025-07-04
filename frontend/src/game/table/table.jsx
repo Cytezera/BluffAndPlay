@@ -1,5 +1,6 @@
 import React , { useState, useEffect } from "react";
 import styles from "./table.module.css";
+import Players from "./players/players.jsx";
 import socket from "../../socket.js";
 
 const Table = ({game}) => {
@@ -15,10 +16,11 @@ const Table = ({game}) => {
                 <div>Pot: {game.gameState.pot}</div>
             </div>
             <div>
-                {!game.active && game.winner&&(
-                    <div> Winner : {game.gameState.winner.name.map((name,index) =>(
-                        <div key={index}>{name}</div>
+                {!game.gameState.active && (
+                    <div> Winner : {game.gameState.winner.map((player,index) =>(
+                        <div key={index}>{player.name}</div>
                     ))}
+                        <div>{ game.gameState.winner[0].desc}</div>
                     </div>
                 )}
             </div>
@@ -30,22 +32,7 @@ const Table = ({game}) => {
                     {card.value} of {card.suit}
                 </div>
             ))}
-            <div> Players: </div>
-            {game.players.map((player,index) =>{
-                let role = ' ';
-                let turn = ' ';
-                let bet = ' ' ;
-                let folded = ' ';
-                if (game.gameState.active && player.id === game.gameState.bb) role = ' - Big Blind';
-                if (game.gameState.active && player.id === game.gameState.round.sb) role = ' - Small Blind';
-                if (game.gameState.active && player.id === game.gameState.round.curTurn) turn = ' (Player\'s Turn)'
-                if (player.bet) bet = player.bet
-                if (player.folded === true) folded = "FOLDED"
-                return ( 
-                    <div key ={index}>({player.chips}) {player.name}  {role}  Bet: {bet} {folded} {turn}</div>
-                )
-                
-            })}
+            <Players game = {game}/>
             
         </div>
     )

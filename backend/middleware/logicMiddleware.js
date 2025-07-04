@@ -6,6 +6,13 @@ const checkWinner = (game) =>{
         let winner = { id:[], name:[] ,desc:[]};
         if (playersLeft.length === 1){
             game.gameState.winner.id = playersLeft[0].id;
+            game.gameState.winner = [
+                {
+                    id: playersLeft[0].id,
+                    name: playersLeft[0].name,
+                    desc: "Fold"
+                }
+            ];
             playersLeft[0].chips += game.gameState.pot;
             return
         }
@@ -20,15 +27,21 @@ const checkWinner = (game) =>{
             console.log(bestFive);
             if ( bestFive.bestScore > bestScore ){
                 console.log(`best Five has ${bestFive.bestScore} , while bestScore has ${bestScore} `);
-                bestScore = bestFive.bsetScore
-                winner = { id: [] , name:[], desc: []};
-                winner.id.push(player.id);
-                winner.name.push(player.name);
-                winner.desc.push(bestFive.bestDesc);
+                bestScore = bestFive.bestScore
+                winner = [
+                    {
+                        id: player.id,
+                        name: player.name,
+                        desc: bestFive.bestDesc
+                    }
+                ];
             }else if (bestScore === bestFive.bestScore){
-                winner.id.push(player.id);
-                winner.name.push(player.name);
-                winner.desc.push(bestFive.bestDesc);
+                winner.push({
+                    id: player.id,
+                    name: player.name,
+                    desc: bestFive.bestDesc
+                })
+
                 
             }
 
@@ -37,7 +50,7 @@ const checkWinner = (game) =>{
             let player = game.players.find(p=> p.id === id);
             player.chips += game.gameState.pot / winner.id.length;
         }
-        game.gameState.winner = inner;
+        game.gameState.winner = winner;
     }
 
 module.exports = { checkWinner};

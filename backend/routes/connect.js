@@ -23,7 +23,7 @@ module.exports = ( io, activeGames) =>{
                     highestBet:null,
                     stage:0,
                     table: [],
-                    winner:{id:[], name:[], desc:[],},
+                    winner: [],
                     round:{
                         curTurn:null,
                         lastTurn:null,
