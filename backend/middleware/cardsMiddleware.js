@@ -29,6 +29,12 @@ const valueRank = {
     "K":13,
     "A":14
 }
+const suitToScore = {
+    "diamond":20,
+    "clubs":40,
+    "hearts":60,
+    "spades":80
+}
 
 const evaluateCards = (hand) => {
     const values = hand.map(card => valueRank[card.value]).sort((a,b) => b - a );
@@ -48,33 +54,49 @@ const evaluateCards = (hand) => {
     const numPairs = counts.filter(c => c === 2 ).length;
     let score = 0;
     let description = ' ';
-    
+    const highestVal= parseInt(Object.keys(valueCounts).find(key => valueCounts[key] === counts[0]));
+
     if (straight && flush ){
-        score = 8;
+        score = 80000;
+        score += uniqueValues[4] * 100;
+        score += suitToScore[suits[0]] * 100;
         description = "Straight Flush";
     }else if (isFour){
-        score = 7
+        score = 70000;
+        score += highestVal * 100;
         description = "Four of a kind";
     }else if (isThree && isPair){
-        score = 6;
+        score = 60000;
+        score += highestVal * 100;
         description = "Full house";
     }else if (flush){
-        score =5;
+        score =50000;
+        score += suitToScore[suits[0]] * 100;
         description = "Flush";
     }else if (straight){
-        score = 4;
+        score = 40000;
+        score += uniqueValues[4] * 100;
         description = "Straight";
     }else if (isThree){
-        score = 3;
+        score = 30000;
+        score += highestVal * 100 ;
         description = "Three of a Kind";
     }else if (numPairs === 2 ){
-        score = 2 ;
+        score = 20000 ;
+        const pairValues = Object.entries(valueCounts).filter(([val, count]) => count === 2).map(([val]) => parseInt(val)).sort((a, b) => b - a); 
+        score += pairValues[0] * 100;
+        score += pairValues[1] * 10;
+        score +=  parseInt(Object.entries(valueCounts).find(([_, count]) => count === 1)?.[0] ?? 0) ;
+
         description = "Two Pairs";
     }else if (isPair ){
-        score =1 ;
+        score =10000 ;
+        score += highestVal * 100;
+        score +=  Math.max(...values) * 10; 
         description = "Pair";
     }else {
         score = 0;
+        score +=  Math.max(...values) *100; 
         description = "High Card";
     }
     return {score , description};

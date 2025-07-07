@@ -32,7 +32,7 @@ const gameEnd = async(game,io) =>{
     checkWinner(game);
     game.gameState.active = false;
     io.to(game.code).emit("updateGame",game);
-    await sleep(3000);
+    await sleep(9000);
     resetRound(game);
     io.to(game.code).emit("updateGame",game);
 }
@@ -66,15 +66,14 @@ const playerCheck = (socketid,game,io) =>{
 const playerFold = async (socketid, game, io) =>{
     let curPlayer = game.players.find(p=> p.id === socketid);
     curPlayer.folded = true;
-    if (socketid === game.gameState.round.lastTurn){
-        let curIndex = game.players.findIndex(p => p.id === socketid);
+    await nextTurn(game,io);
+    if (socketid === game.gameState.round.lastTurn){ let curIndex = game.players.findIndex(p => p.id === socketid);
         let ori = curIndex;
         do{
             curIndex = (curIndex + 1) % game.players.length;
         }while(game.players[curIndex].folded === true);
         game.gameState.round.lastTurn = game.players[curIndex].id;
     }
-    await nextTurn(game,io);
     io.to(game.code).emit("updateGame",game);
 }
 const playerRaise = (socketid, game, io, amount) =>{

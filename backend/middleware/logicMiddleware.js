@@ -3,7 +3,6 @@ const { getBestHand } = require ("./cardsMiddleware");
 
 const checkWinner = (game) =>{
         const playersLeft = game.players.filter(p => !p.folded);
-        let winner = { id:[], name:[] ,desc:[]};
         if (playersLeft.length === 1){
             game.gameState.winner.id = playersLeft[0].id;
             game.gameState.winner = [
@@ -16,6 +15,7 @@ const checkWinner = (game) =>{
             playersLeft[0].chips += game.gameState.pot;
             return
         }
+        let winner = [];
         while(game.gameState.table.length < 5){
             game.gameState.table.push(game.gameState.deck.pop());
         }
@@ -46,9 +46,9 @@ const checkWinner = (game) =>{
             }
 
         }
-        for (const id of winner.id){
-            let player = game.players.find(p=> p.id === id);
-            player.chips += game.gameState.pot / winner.id.length;
+        for (const w of winner){ //split pot 
+            let player = game.players.find(p=> p.id === w.id);
+            player.chips += game.gameState.pot / winner.length;
         }
         game.gameState.winner = winner;
     }

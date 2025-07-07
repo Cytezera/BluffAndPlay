@@ -4,10 +4,16 @@ import socket from "../../../socket.js";
 
 const Button = ({game}) =>{
 
-    const [raiseAmount, setRaiseAmount] = useState(game.minBet);
-
     const curPlayer = game.players.find(p => p.id === socket.id);
-    const minBet = game.minBet || 0;
+    const minBet = game.gameState.highestBet > curPlayer.bet ? game.gameState.highestBet - curPlayer.bet : game.minBet;
+    
+    const [raiseAmount, setRaiseAmount] = useState(minBet);
+
+    useEffect(() =>{
+        setRaiseAmount(minBet); 
+    },[game]);
+
+
     const maxBet = curPlayer ? curPlayer.chips : minBet;
     const gameCheck = () =>{
         socket.emit("check",(game.code));

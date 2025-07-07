@@ -8,6 +8,8 @@ const http = require("http");
 const app = express();
 const server = http.createServer(app);
 const API_URL = process.env.API_URL;
+const db = require("./routes/database.js");
+
 
 const corsOptions = {
     origin: API_URL,
@@ -21,8 +23,13 @@ const io = new Server(server, {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+//socket
 let activeGames = {};
 require("./routes/connect")(io,activeGames);
+
+//put all the routes here sia 
+const login = require("./routes/login");
+app.use("/api",login);
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, ()=>{
