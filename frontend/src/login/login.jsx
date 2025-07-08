@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react" ;
-import axios from "axios"
 import { useNavigate , Link } from "react-router-dom";
 import styles from "./login.module.css";
-const API_URL = import.meta.env.VITE_API_URL;
+import API from "../api/axiosInstances.jsx";
 
 const Login = () =>{
     const [username , setUsername] = useState("");
@@ -10,9 +9,10 @@ const Login = () =>{
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
     const checkValid = () =>{
-        axios.post(`${API_URL}/api/login`, {username, password})
+        API.post("/api/login/", {username, password})
             .then((response) =>{
                 if(response.data.loggedIn){
+                    localStorage.setItem("token", response.data.token);
                     navigate("/dashboard");
                 }else{
                     setPassword("");

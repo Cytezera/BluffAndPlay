@@ -31,6 +31,9 @@ require("./routes/connect")(io,activeGames);
 const login = require("./routes/login");
 app.use("/api",login);
 
+const authentication = require("./routes/authentication");
+app.use("/api",authentication);
+
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);

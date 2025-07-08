@@ -22,4 +22,27 @@ router.post("/login", (req,res) =>{
     });
 });
 
+router.post("/register", (req,res)=>{
+    const { username, password, email } = req.body;
+    if (!username || !password || !email){
+        return res.json({ registered: false, message:"All fields are required"});
+    }
+    db.query("Select * from users where username = ? ", [username] , (err, results) =>{
+        if(err){
+            return res.json({ registered:false , message: "SQL Error", error: err});
+        }
+        if (results.length > 0){
+            return res.json({ registered:false , message: "Username is taken"});
+        }else {
+            db.query("Insert into users (username, email, password) values (?, ? ,?)", [username,email,password], (err, results)=>{
+                if (err){
+                    return res.json({registered:false, message: "SQL Error"});
+                }
+                return res.json({registered:true}); 
+
+            })
+        }
+    })
+});
+
 module.exports = router;
