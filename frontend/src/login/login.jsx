@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react" ;
 import { useNavigate , Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import styles from "./login.module.css";
 import API from "../api/axiosInstances.jsx";
 
@@ -7,12 +8,14 @@ const Login = () =>{
     const [username , setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const { setUser} = useAuth();
     const navigate = useNavigate();
     const checkValid = () =>{
         API.post("/api/login/", {username, password})
             .then((response) =>{
                 if(response.data.loggedIn){
                     localStorage.setItem("token", response.data.token);
+                    setUser(response.data.user);
                     navigate("/dashboard");
                 }else{
                     setPassword("");

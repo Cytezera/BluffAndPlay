@@ -13,7 +13,7 @@ router.post("/login", (req,res) =>{
         if(results.length > 0){
             const user = results[0];
             const token = jwt.sign(
-                { id: user.username } , process.env.JWT_SECRET, {expiresIn: "1h"}
+                { username: user.username } , process.env.JWT_SECRET, {expiresIn: "1h"}
             );
             return res.json({ loggedIn: true,token, user:{username: user.username}}); 
         }else {

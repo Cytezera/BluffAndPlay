@@ -1,0 +1,33 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #333;
+  padding: 1rem 2rem;
+}
+
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLinks li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navLinks li a:hover {
+  text-decoration: underline;
+}
+
+.profile a {
+  font-style: italic;
+  color: #90ee90;
+}
+
