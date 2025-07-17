@@ -29,44 +29,38 @@ const Register = () =>{
        
     }
     return(
-        <div>
-            <div>
+        <div className={styles.registerPage}>
+            <div className={styles.registerBox}>
                 <input 
                     type = "text"
                     placeholder = "Username"
                     value = {username}
                     onChange = {(e) => setUsername(e.target.value)}
                 />
-            </div>
-            <div>
                 <input 
                     type = "text"
                     placeholder = "Email"
                     value = {email}
                     onChange = {(e) => setEmail(e.target.value)}
                 />
-            </div>
-            <div>
                 <input 
                     type = "password"
                     placeholder = "Password"
                     value = {password}
                     onChange = {(e) => setPassword(e.target.value)}
                 />
-            </div>
-            <div>
                 <input 
                     type = "password"
                     placeholder = "Retype Password"
                     value = {retypePassword}
                     onChange = {(e) => setRetypePassword(e.target.value)}
                 />
-            </div>
             {message &&(
-                <div>{message}</div>
+                <div className={styles.message}>{message}</div>
             )}
             <div>
                 <button onClick={handleClick}> Register </button> 
+            </div>
             </div>
             
         </div>

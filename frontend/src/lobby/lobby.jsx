@@ -7,11 +7,13 @@ import Navbar from "../dashboard/navbar/navbar.jsx";
 
 const Lobby = () =>{
     return (
-            <div>
+            <div className={styles.lobby}>
                 <Navbar/>
                 <div>Lobby </div>
-                <Searchbar/>
-                <Create/>
+                <div className={styles.search}>
+                    <Searchbar/>
+                    <Create/>
+                </div>
             </div>
     );
 };

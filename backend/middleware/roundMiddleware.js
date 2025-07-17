@@ -2,7 +2,15 @@ const {  checkWinner} = require("./logicMiddleware");
 const { generateDeck, distributeCards  } = require("./deckMiddleware");
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+const resetBet = (game) => {
+    for (const player of game.players){
+        game.gameState.pot += player.bet;
+        player.bet = 0;
+    }
+    game.gameState.highestBet = 0;
+}
 const changeStage = (game,io) => {
+    resetBet(game);
     stage = game.gameState.stage
     deck = game.gameState.deck;
     table = game.gameState.table;
@@ -26,7 +34,6 @@ const changeStage = (game,io) => {
 const changeBet = (player,amount) =>{
     player.chips -= amount;
     player.bet += amount;
-    game.gameState.pot += amount;
 }
 const gameEnd = async(game,io) =>{
     checkWinner(game);

@@ -1,0 +1,31 @@
+.player {
+    position: absolute;
+    width: 150px;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.player:nth-child(1) { top: 0%; left: 40%; }
+.player:nth-child(2) { top: 10%; left: 75%; }
+.player:nth-child(3) { top: 35%; left: 90%; }
+.player:nth-child(4) { top: 65%; left: 80%; }
+.player:nth-child(5) { top: 85%; left: 50%; }
+.player:nth-child(6) { top: 65%; left: 10%; }
+.player:nth-child(7) { top: 35%; left: 0%; }
+.player:nth-child(8) { top: 10%; left: 15%; }
+
+.playerInfo {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 6px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.playerCards{
+    display:flex;
+}
+.cardImage {
+    width: 80px;
+    height: auto;
+    margin: 0 5px;
+}

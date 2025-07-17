@@ -1,8 +1,11 @@
 import React,{ useState, useEffect } from "react";
+import styles from "./searchbar.module.css";
 import { useNavigate } from "react-router-dom";
 import socket from "../../socket.js";
+import { useAuth } from "../../context/AuthContext";
 
 const Searchbar = () => {
+    const { user } = useAuth();
     const navigate = useNavigate();
     const [query,setQuery] = useState("");
     const handleChange = (e) =>{
@@ -10,7 +13,7 @@ const Searchbar = () => {
     }
 
     const handleClick = () =>{
-        socket.emit("checkRoom",query);
+        socket.emit("checkRoom", { roomCode: query, playerName: user.username});
         socket.once("roomCreated", (roomCode) =>{
             navigate(`/game/${roomCode}`);
         });
@@ -20,9 +23,9 @@ const Searchbar = () => {
         
     }
     return (
-        <div>
+        <div className={styles.searchbar}>
             <input type="text" value ={query} onChange={handleChange} placeholder="Enter room key"/>
-            <button onClick={handleClick}>Enter</button>
+            <button onClick={handleClick} className={styles.button}>Enter</button>
         </div>
     );
 };

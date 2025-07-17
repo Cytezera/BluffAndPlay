@@ -7,7 +7,7 @@ module.exports = ( io, activeGames) =>{
     io.on("connection", (socket) =>{
         console.log(`${socket.id} has joined the table`);
        
-        socket.on("createRoom",() =>{
+        socket.on("createRoom",(playerName) =>{
             const roomCode = generateRoomCode(activeGames);  
             activeGames[roomCode] = {
                 code: roomCode,
@@ -32,13 +32,11 @@ module.exports = ( io, activeGames) =>{
                 players: []
             };
             const game = activeGames[roomCode]
-            playerName = "Test"
             joinRoom(io,socket,game,roomCode, playerName);
             socket.emit("roomCreated", roomCode);
         });
-        socket.on("checkRoom",(roomCode) =>{
+        socket.on("checkRoom",({roomCode,playerName}) =>{
             if (activeGames[roomCode]){
-                playerName = "Test 1";
                 let game = activeGames[roomCode];
                 joinRoom(io,socket,game,roomCode,playerName);
                 socket.emit("roomCreated", roomCode);

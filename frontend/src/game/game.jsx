@@ -30,23 +30,26 @@ const Game = () => {
         console.log(game);
     },[game]);
     return (
-        <div>
+        <div className={styles.game}>
             {game && game.start === false &&(
-                <div>
+                <div className={styles.lobbyWrapper}>
                     <div>Waiting for players... </div>
-                    <div>Players in lobby : </div>
-                    {game.players.map((player,index) =>(
-                        <div key={index}> {player.name}</div>
-                    ))} 
+                    <div className={styles.lobbyCode}>{roomCode} </div>
+                    <div className={styles.playerList}>
+                        {game.players.map((player,index) =>(
+                            <div key={index} className={styles.playerName}> 👤  {player.name}</div>
+                        ))} 
+                    </div>
                     <button onClick={handleCopy} >  Copy Code </button>
+                    {game && game.start === false && game.players.length >= 2 && socket.id === game.host && (
+                        <button onClick={handleClick} className={styles.startButton}>Start Game</button>
+                    )}
                 </div>
             )}
 
-            {game && game.start === false && game.players.length >= 2 && socket.id === game.host && (
-                <button onClick={handleClick}>Here</button>
-            )}
+
             {game && game.start === true &&(
-                <div>
+                <div className={styles.game}>
                     <Table game = {game}/>
                 {game.gameState.active === true && (
                     <Player game = {game}/>

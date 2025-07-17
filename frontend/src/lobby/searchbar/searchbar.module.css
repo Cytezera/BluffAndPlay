@@ -1,0 +1,10 @@
+.searchbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.button{
+    margin-left:0;
+    width:80px;
+}

@@ -31,9 +31,9 @@ const Button = ({game}) =>{
                 <div>
                     <div> Your Turn: </div>
                     <div>
-                        <button onClick={gameCheck}> Call/Check </button>
-                        <button onClick={gameRaise}> Raise: {raiseAmount} </button>
-                        <button onClick={gameFold}> Fold </button>
+                        <button onClick={gameCheck} className={styles.button}> Call/Check </button>
+                        <button onClick={gameRaise} className={styles.button}> Raise: {raiseAmount} </button>
+                        <button onClick={gameFold}  className={styles.button}> Fold </button>
                     </div>
                     <input type="range" min={minBet} max={maxBet} value={raiseAmount} onChange={(e) => setRaiseAmount(Number(e.target.value))}/>
                 </div>

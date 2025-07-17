@@ -1,0 +1,87 @@
+.game{
+    width:100%;
+    height: 100vh;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+}
+.lobbyWrapper {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 12px;
+  color: white;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lobbyCode {
+  font-size: 16px;
+  background-color: #1a2b3a;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-items:center;
+  justify-content:center;
+  display:flex;
+}
+
+.lobbyCode button {
+  background-color: #66B2FF;
+  color: black;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
+.lobbyCode button:hover {
+  background-color: #3399ff;
+}
+
+.playerList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.playerName {
+  background-color: #223344;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: 100%;
+  text-align: left;
+}
+
+.notice {
+  color: #ffa500;
+  font-style: italic;
+}
+
+.startButton {
+  background-color: #00cc66;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.startButton:hover {
+  background-color: #00b359;
+}
+
+.startButton{
+    margin-top:0;
+    margin-bottom:0px;
+}

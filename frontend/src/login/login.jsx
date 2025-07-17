@@ -24,14 +24,16 @@ const Login = () =>{
             });
     };
     return(
-        <div>
-            <div>
+        <div className={styles.loginPage}>
+            <div className={styles.logginBox}>
                 <input 
                     type = "text"
                     placeholder = "Username"
                     value = {username} 
                     onChange ={(e) => setUsername(e.target.value)} 
                 />
+
+            <div className={styles.logginBox}>
                 <input 
                     type = "password"
                     placeholder = "Password"
@@ -39,8 +41,9 @@ const Login = () =>{
                     onChange ={(e) => setPassword(e.target.value)} 
                 />
             </div>
+            </div>
             {message && (
-                <div>{message}</div>
+                <div className={styles.message}>{message}</div>
             )}
             <div>
                 <button onClick={checkValid}>Login</button>

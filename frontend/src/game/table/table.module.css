@@ -1,0 +1,52 @@
+.pokerTable {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    margin: 40px auto;
+    background: radial-gradient(circle, #2e8b57, #006400);
+    border: 8px solid #013220;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tableCentre{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    
+}
+.tableCards{
+    width:450px
+}
+
+.pot {
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+.winnerBox {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffeb3b;
+    font-weight: bold;
+    text-align: center;
+}
+
+.cardImage {
+    width: 80px;
+    height: auto;
+    margin: 0 5px;
+}
+

@@ -14,9 +14,9 @@ const Profile = () =>{
         navigate("/login");
     }
     return (
-        <div>
+        <div className={styles.profile}>
             <Navbar/>
-            <button onClick={logout}>Log out</button>
+            <button onClick={logout} className={styles.logout}>Log out</button>
         </div>
     )
 
